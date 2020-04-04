@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw-funny</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/reset.css">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+        <div class="content">
+            <div class="header">
+                <div class="logo">
+                    <img class="img-fluid" src="img/logo.png" alt="logo">
+                </div>
+            </div>
+            <div class="main">
+                <div class="settings">
+                    <div id="myfond_gris" opendiv=""></div>
+                    <div class="color">
+                        <form name="color_form" id="color_form" class="color_form">
+                            <button class="img_color_batton" id="img_color_batton" name="img_color_batton"><img class="img-fluid"
+                                    src="img/colorpicker.png"
+                                id="color_img" width="30"></button>
+                            <input class="form-field form-control form-control-sm color_input" type="text" placeholder="black" name="color_input" id="color_input" name="color_input" >
+                            <button class="color_button">
+                                <img class="img-fluid" src="img/ok.png" alt="">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="eraser">
+                        <form name="eraser_form" id="eraser_form" class="eraser_form">
+                            <button class="img_eraser_batton" id="img_eraser_batton" name="img_eraser_batton">
+                                <img class="img-fluid"
+                                    src="img/easer.png"
+                                id="eraser_img" width="30">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="size">
+                        <form name="size_form" id="size_form" class="size_form">
+                            <button class="img_size_batton" id="img_size_batton" name="img_size_batton"><img
+                                    class="img-fluid" src="https://img.icons8.com/ultraviolet/452/resize-vertical.png"
+                                    id="size_img" width="30"></button>
+                            <input class="form-field form-control form-control-sm size_input" type="text"
+                                placeholder="1" name="size_input" id="size_input" name="size_input">
+                            <button class="size_button">
+                                <img class="img-fluid" src="img/ok.png" alt="">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="clear">
+                        <form name="clear_form" id="clear_form" class="clear_form">
+                            <button class="img_clear_batton" id="img_clear_batton" name="img_clear_batton">
+                                <img class="img-fluid" src="img/clear.png" id="clear_img" width="30">
+                            </button>
+                        </form>
+                    </div>
+                    <div class="rect">
+                        <form name="rect_form" id="rect_form" class="rect_form">
+                            <button class="img_rect_batton" id="img_rect_batton" name="img_rect_batton">
+                            </button>
+                        </form>
+
+                    </div>
+                    
+                </div>
+                <div class="draw">
+                    <canvas id='canvas' style="display: block; position: relative;">Your browser is not supported. U mad
+                        bro.</canvas>
+                    <script>
+                        const canvas = document.getElementById('canvas'),
+                            ctx = canvas.getContext('2d');
+                        var isMouseDown = false,
+                            coords = [];
+                            var rect = false;
+                        document.getElementById('img_rect_batton').ondblclick = function () {
+                            if (rect == false) {
+                                rect = true;
+                                alert(1)
+                            }
+                            else if (rect == true) {
+                                rect = false;
+                            }
+                            return false;
+                        }
+                        canvas.width = 1250;
+                        canvas.height = 600;
+                        canvas.addEventListener('mousedown', function () {
+                            isMouseDown = true;
+                        });
+                        canvas.addEventListener('mouseup', function () {
+                            isMouseDown = false;
+                            ctx.beginPath();
+                        });
+                        canvas.addEventListener('mousemove', function (e)
+                            {
+                                if (isMouseDown && rect == false) {
+                                    ctx.lineTo(e.clientX-this.offsetLeft - 30, e.clientY-this.offsetTop);
+                                    ctx.stroke();
+                                    ctx.beginPath();
+                                    ctx.arc(e.clientX-this.offsetLeft - 30, e.clientY-this.offsetTop, ctx.lineWidth/2,
+                                    0,
+                                    Math.PI * 2);
+                                    ctx.fill();
+                                    ctx.beginPath();
+                                    ctx.moveTo(e.clientX-this.offsetLeft - 30, e.clientY-this.offsetTop);
+                                };
+                            });
+                    </script>
+                </div>
+            </div>
+        </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+    <script src="main.js" defer></script>
+    <script src="jquery.maskedinput.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" defer>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer>
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer>
+    </script>
+    <script type="text/javascript" src="particles.js" defer></script>
+    <script type="text/javascript" src="app.js" defer></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js" defer></script>
+</body>
+</html>
