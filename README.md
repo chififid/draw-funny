@@ -1,2 +1,2 @@
 # Draw-funny
-Go to draw!
+Let's go draw!
